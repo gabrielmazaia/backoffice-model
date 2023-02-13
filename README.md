@@ -1,27 +1,36 @@
 # BackofficeModel
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+Desenvolvido seguindo direcionamento do briefing utilizando Angular 15. 
 
-## Development server
+[BRIEFING]
+"Desenvolver uma plataforma de cadastro utilizando webAPI em .net e Angular conforme o descrito abaixo (No whatsapp foi liberado o uso de outro);
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O sistema é uma plataforma de backOffice contendo o cadastro de Pessoas onde o mesmo poderá ter várias qualificações (cliente, fornecedor, colaborador), 
+ou seja 1 pessoa pode ter mais de 1 qualificação:
 
-## Code scaffolding
+ A pessoa terá os seguintes campos:
+ - Tipo de Pessoa (Fisica ou Juridica) - Obrigatório 
+ - Documento (CPF se pessoa fisica, cnpj se pessoa juridica) - Obrigatório 
+ - Nome (Se pessoa juridica será Razão Social) - Obrigatório 
+ - Apelido (Nome fantasia se pessoa juridica) - Não Obrigatório 
+ - Endreço de cadastro - Obrigatório (Preenchimento de dados via API de CEP - viacep) 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Criar o cadastro de departamento contendo:
+ Nome do departamento, Responsável (uma pessoa). 
+ 
+Regras:
+ Não pode existir uma nome de departamento duplicado, 
+ Uma pessoa pode ser responsável por mais de um departamento, só é permitido um responsável que tenha a "qualificação de colaborador". 
 
-## Build
+Observações gerais
+Todos os registros devem ter data e hora de cadastro, data e hora de atualização (se houve atualização)";
+ 
+# REST WEB API
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+UTILIZEI O JSON-SERVER (fake rest api), por não ter muito conhecimento de fakes api's.
 
-## Running unit tests
+- json-server db.json 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# CEP Autocomplete 
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Utilizei o Via-CEP como direcionado no briefing;
