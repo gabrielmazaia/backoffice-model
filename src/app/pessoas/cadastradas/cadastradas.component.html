@@ -1,0 +1,133 @@
+<div class="container-fluid">
+  <div class="pessoas cadastradas col-lg-12 p-5">
+    <h2>Pessoal Cadastrado</h2>
+    <div class="row">
+    <div *ngFor="let item of pessoas" class="col-lg-4 p-5 border">
+      <div *ngIf="item.tipoPessoa == 'fisica'">
+        Nome: {{item.nomeCompleto}}<br/>
+        Qualificação: {{item.qualificacao}}<br/>
+        CPF/Documento: {{item.cpf}}<br/>
+        Data de Criação: {{item.horaCriacao}}<br/>
+        Data de Atualização: {{item.horaAtualizacao}}
+      </div>
+      <div *ngIf="item.tipoPessoa == 'juridica'">
+        Nome: {{item.razaoSocial}}<br/>
+        Qualificação: {{item.qualificacao}}<br/>
+        CNPJ/Documento: {{item.cnpj}}<br/>
+        Data de Criação: {{item.horaCriacao}}<br/>
+        Data de Atualização: {{item.horaAtualizacao}}
+      </div>
+      <hr>
+      <button class="remove btn btn-primary btn-add-pessoa mr-1" (click)="deletePessoas(item)">Remover</button>
+      <button class="edit btn btn-primary btn-add-pessoa mr-1" (click)="atualizaPessoa(item)">Editar</button>
+      </div>
+    </div>
+  </div>
+  <div class="pessoa-edit " *ngIf="this.editar == true">
+    <div class="pessoa-editar container p-5 border">
+      <h3>Editar Pessoa</h3>
+
+    <form id="add-form" (ngSubmit)="f.form.valid && getData(f)" #f="ngForm" novalidate>
+      <label for="model">Tipo de Pessoa</label>
+      <div class="form-group row">
+
+        <fieldset class="col-lg-12 d-inline-flex justify-content-start">
+          <label class="radio_label p-1" for="fisica"><input checked type="radio" class="mr-1" name="tipoPessoa" [(ngModel)]="pessoa.tipoPessoa" #tipo_pessoa="ngModel" [ngClass]="{'is-invalid':f.submitted && tipo_pessoa.invalid }" id="fisica" value="fisica">Pessoa Física</label>
+          <label class="radio_label p-1" for="juridica"><input type="radio" class="mr-1" name="tipoPessoa" [(ngModel)]="pessoa.tipoPessoa" #tipo_pessoa="ngModel" [ngClass]="{'is-invalid':f.submitted && tipo_pessoa.invalid }" id="juridica" value="juridica">Pessoa Jurídica</label>
+        </fieldset>
+      </div>
+      <div class="row" *ngIf="this.pessoa.tipoPessoa === 'fisica' || this.pessoa.tipoPessoa === ''; else fisicaForm" #fisicaForm >
+        <div class="form-group col-lg-4">
+            <label for="model">Nome</label>
+            <input type="text" [(ngModel)]="pessoa.nomeCompleto" id="nomeCompleto" name="nomeCompleto" #nomeCompleto="ngModel" required class="form-control"
+            [ngClass]="{ 'is-invalid': f.submitted && nomeCompleto.invalid }" placeholder="Digite o Nome"/>
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="model">Apelido</label>
+          <input type="text" [(ngModel)]="pessoa.apelido" id="apelido" name="apelido" #apelido="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && apelido.invalid }" placeholder="Digite o Apelido">
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="model">CPF</label>
+          <input type="text" [(ngModel)]="pessoa.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite o CPF" >
+        </div>
+      </div>
+      <ng-template #fisicaForm>
+        <div class="row" *ngIf="this.pessoa.tipoPessoa === 'juridica'; else fisicaForm">
+          <div class="form-group col-lg-4">
+            <label for="model">Razão Social</label>
+            <input type="text" [(ngModel)]="pessoa.razaoSocial" id="razaoSocial" name="razaoSocial" #razaoSocial="ngModel" required class="form-control"
+            [ngClass]="{ 'is-invalid': f.submitted && razaoSocial.invalid }" placeholder="Digite a Razão Social">
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="model">Nome Fantasia</label>
+          <input type="text" [(ngModel)]="pessoa.nomeFantasia" id="nomeFantasia" name="nomeFantasia" #nomeFantasia="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && nomeFantasia.invalid }" placeholder="Digite o Nome Fantasia">
+        </div>
+        <div class="form-group col-lg-4">
+          <label for="model">CNPJ</label>
+          <input type="text" [(ngModel)]="pessoa.cnpj" id="cnpj" name="cnpj" #cnpj="ngModel" required class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && cnpj.invalid }" placeholder="Digite o CNPJ">
+        </div>
+        </div>
+      </ng-template>
+      <hr class="my-2">
+      <div class="row px-3 justify-content-start align-items-end">
+        <div class="form-group col-lg-4 px-0">
+          <label for="model">Qualificação</label>
+          <select name="qualificacao" [(ngModel)]="pessoa.qualificacao" id="qualificacao" name="qualificacao" #qualificacao="ngModel" required class="form-control" >
+            <option value="cliente">Cliente</option>
+            <option value="fornecedor">Fornecedor</option>
+            <option value="colaborador">Colaborador</option>
+          </select>
+        </div>
+      </div>
+      <hr class="my-2">
+      <h5>Informações Contato e Endereço</h5>
+      <div class="row px-3 justify-content-start align-items-end">
+      <div class="form-group col-lg-4 px-0">
+        <label for="model">CEP</label>
+        <input type="text" (ngModelChange)="searchCEP()" [(ngModel)]="pessoa.cep" id="cep" name="cep" #cep="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && cep.invalid }" placeholder="Digite o CEP">
+      </div>
+      <div class="col-lg-8 pb-2">
+        <p>Não sabe seu cep? <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Clique aqui</a></p>
+      </div>
+      <div class="form-group col-lg-9 px-1">
+        <label for="model">Endereço</label>
+        <input type="text" [(ngModel)]="pessoa.rua" id="rua" name="rua" #rua="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && rua.invalid }" placeholder="">
+      </div>
+      <div class="form-group col-lg-3 px-1">
+        <label for="model">Número</label>
+        <input type="text" [(ngModel)]="pessoa.numero" id="numero" name="numero" #numero="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && numero.invalid }" placeholder="">
+      </div>
+      <div class="form-group col-lg-6 px-1">
+        <label for="model">Complemento</label>
+        <input type="text" [(ngModel)]="pessoa.complemento" id="complemento" name="complemento" #complemento="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && complemento.invalid }" placeholder="Bloco / Casa Fundos">
+      </div>
+      <div class="form-group col-lg-6 px-1">
+        <label for="model">Bairro</label>
+        <input type="text" [(ngModel)]="pessoa.bairro" id="bairro" name="bairro" #bairro="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && bairro.invalid }" placeholder="">
+      </div>
+      <div class="form-group col-lg-9 px-1">
+        <label for="model">Cidade</label>
+        <input type="text" [(ngModel)]="pessoa.cidade" id="cidade" name="cidade" #cidade="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && cidade.invalid }" placeholder="">
+      </div>
+      <div class="form-group col-lg-3 px-1">
+        <label for="model">UF</label>
+        <input type="text" [(ngModel)]="pessoa.estado" id="estado" name="estado" #estado="ngModel" required class="form-control"
+        [ngClass]="{ 'is-invalid': f.submitted && estado.invalid }" placeholder="">
+      </div>
+    </div>
+      <button type="submit" class="btn btn-primary btn-add-pessoa">Salvar</button>
+
+    </form>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.aside-menu{
+  background: rgb(10, 10, 74);
+  min-height: 100vh;
+  nav{
+    display: flex;
+    flex-wrap: wrap;
+    ul{
+      padding: 0px;
+      list-style: none;
+      li{
+        .submenu{
+          display: none;
+        }
+        &:hover{
+          .submenu{
+            display: block;
+          }
+        }
+      }
+    }
+    a{
+      padding: 0px 1rem;
+      color: #FFF;
+      font-size: 0.9rem;
+      font-family: 'Montserrat',sans-serif;
+      width: 100%;
+      border-left: 2px solid transparent;
+      text-decoration: none;
+      &:hover{
+        border-left: 2px solid #fff;
+      }
+      i{
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+      span{
+        margin-left: 1rem;
+      }
+    }
+    .brand-mark{
+      font-family: 'Poppins',sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #FFF;
+      line-height: 1;
+    }
+  }
+
+}

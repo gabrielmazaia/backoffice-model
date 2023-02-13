@@ -1,0 +1,46 @@
+{
+  "departamentos": [
+    {
+      "nomeDepto": "Financeiro",
+      "responsavel": "TESTE 2",
+      "dataCriacao": "02/13/2023 1:57:40",
+      "id": 1
+    }
+  ],
+  "pessoas": [
+    {
+      "tipoPessoa": "fisica",
+      "qualificacao": "colaborador",
+      "cep": "09271400",
+      "rua": "Rua Jorge Beretta",
+      "numero": "1105",
+      "complemento": "teste",
+      "bairro": "Parque Erasmo Assunção",
+      "cidade": "Santo André",
+      "estado": "SP",
+      "nomeCompleto": "TESTE 2",
+      "apelido": "teste",
+      "cpf": "12345678900",
+      "id": 11,
+      "horaAtualizacao": "02/13/2023 1:26:26"
+    },
+    {
+      "tipoPessoa": "juridica",
+      "qualificacao": "colaborador",
+      "cep": "09271400",
+      "rua": "Rua Jorge Beretta",
+      "numero": "1105",
+      "complemento": "teste",
+      "bairro": "Parque Erasmo Assunção",
+      "cidade": "Santo André",
+      "estado": "SP",
+      "nomeCompleto": null,
+      "apelido": null,
+      "cpf": null,
+      "razaoSocial": "teste",
+      "nomeFantasia": "teste",
+      "cnpj": "451594123125123",
+      "id": 15
+    }
+  ]
+}

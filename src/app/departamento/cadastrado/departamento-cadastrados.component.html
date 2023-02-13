@@ -1,0 +1,15 @@
+<section class="container-fluid">
+  <div class="pessoas cadastradas col-lg-12 p-5">
+      <h2>Departamentos Cadastrados</h2>
+      <div class="row">
+          <div *ngFor="let depto of departamentos" class="col-lg-4 p-5 border">
+            Departamento: {{depto.nomeDepto}}<br/>
+            Responsável: {{depto.responsavel}}<br/>
+            Data de Criação: {{depto.dataCriacao}}<br/>
+            <hr>
+            <button class="remove btn btn-primary btn-add-pessoa" (click)="deleteDepartamento(depto)">Remover</button>
+          </div>
+      </div>
+  </div>
+
+</section>

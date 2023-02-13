@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <div class="row">
+  <div class="pessoas cadastradas col-lg-12 p-5">
+    <h2>CADASTRO DE PESSOAL</h2>
+    <hr class="my-2">
+    <div class="pessoad-body border py-3 px-3">
+        <form id="add-form" [formGroup]="formularioDePessoa" (ngSubmit)="getData()">
+          <label for="model">Tipo de Pessoa</label>
+          <div class="form-group row">
+            <fieldset class="col-lg-12 d-inline-flex justify-content-start">
+              <label class="radio_label p-1" for="fisica"><input (change)="changePessoa()" [(ngModel)]="pessoa.tipoPessoa" formControlName="tipoPessoa" checked type="radio" class="mr-1" name="tipoPessoa"  id="fisica" value="fisica">Pessoa Física</label>
+              <label class="radio_label p-1" for="juridica"><input (change)="changePessoa()" [(ngModel)]="pessoa.tipoPessoa" formControlName="tipoPessoa" type="radio" class="mr-1" name="tipoPessoa"  id="juridica" value="juridica">Pessoa Jurídica</label>
+            </fieldset>
+          </div>
+          <div class="row" *ngIf="formularioDePessoa.value.tipoPessoa === 'fisica' || formularioDePessoa.value.tipoPessoa === ''; else fisicaForm" #fisicaForm >
+            <div class="form-group col-lg-4">
+                <label for="model">Nome</label>
+                <input formControlName="nomeCompleto" type="text" [(ngModel)]="pessoa.nomeCompleto" id="nomeCompleto" name="nomeCompleto" class="form-control"
+                 placeholder="Digite o Nome"/>
+            </div>
+            <div class="form-group col-lg-4">
+              <label for="model">Apelido</label>
+              <input formControlName="apelido" type="text" [(ngModel)]="pessoa.apelido" id="apelido" name="apelido" class="form-control"
+               placeholder="Digite o Apelido">
+            </div>
+            <div class="form-group col-lg-4">
+              <label for="model">CPF</label>
+              <input formControlName="cpf" type="text" [(ngModel)]="pessoa.cpf" id="cpf" name="cpf" class="form-control"
+               placeholder="Digite o CPF" >
+            </div>
+          </div>
+          <ng-template #fisicaForm>
+            <div class="row" *ngIf="formularioDePessoa.value.tipoPessoa === 'juridica'; else fisicaForm">
+              <div class="form-group col-lg-4">
+                <label for="model">Razão Social</label>
+                <input type="text" formControlName="razaoSocial" [(ngModel)]="pessoa.razaoSocial"  id="razaoSocial" name="razaoSocial"  class="form-control"
+                 placeholder="Digite a Razão Social">
+            </div>
+            <div class="form-group col-lg-4">
+              <label for="model">Nome Fantasia</label>
+              <input type="text" formControlName="nomeFantasia"  [(ngModel)]="pessoa.nomeFantasia" id="nomeFantasia" name="nomeFantasia"  class="form-control"
+               placeholder="Digite o Nome Fantasia">
+            </div>
+            <div class="form-group col-lg-4">
+              <label for="model">CNPJ</label>
+              <input type="text" formControlName="cnpj" id="cnpj" name="cnpj" [(ngModel)]="pessoa.cnpj"  class="form-control"
+               placeholder="Digite o CNPJ">
+            </div>
+            </div>
+          </ng-template>
+          <hr class="my-2">
+          <div class="row px-3 justify-content-start align-items-end">
+            <div class="form-group col-lg-4 px-0">
+              <label for="model">Qualificação</label>
+              <select formControlName="qualificacao"  name="qualificacao" [(ngModel)]="pessoa.qualificacao" id="qualificacao" name="qualificacao" class="form-control" >
+                <option value="cliente">Cliente</option>
+                <option value="fornecedor">Fornecedor</option>
+                <option value="colaborador">Colaborador</option>
+              </select>
+            </div>
+          </div>
+          <hr class="my-2">
+          <h5>Informações Contato e Endereço</h5>
+          <div class="row px-3 justify-content-start align-items-end">
+          <div class="form-group col-lg-4 px-0">
+            <label for="model">CEP</label>
+            <input formControlName="cep" type="text" (ngModelChange)="searchCEP()" [(ngModel)]="pessoa.cep" id="cep" name="cep"  class="form-control"
+             placeholder="Digite o CEP">
+          </div>
+          <div class="col-lg-8 pb-2">
+            <p>Não sabe seu cep? <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Clique aqui</a></p>
+          </div>
+          <div class="form-group col-lg-9 px-1">
+            <label for="model">Endereço</label>
+            <input formControlName="rua" type="text" [(ngModel)]="pessoa.rua" id="rua" name="rua"  class="form-control"
+            placeholder="">
+          </div>
+          <div class="form-group col-lg-3 px-1">
+            <label for="model">Número</label>
+            <input formControlName="numero" type="text" [(ngModel)]="pessoa.numero" id="numero" name="numero"  class="form-control"
+            placeholder="">
+          </div>
+          <div class="form-group col-lg-6 px-1">
+            <label for="model">Complemento</label>
+            <input formControlName="complemento" type="text" [(ngModel)]="pessoa.complemento" id="complemento" name="complemento"  class="form-control"
+             placeholder="Bloco / Casa Fundos">
+          </div>
+          <div class="form-group col-lg-6 px-1">
+            <label for="model">Bairro</label>
+            <input formControlName="bairro" type="text" [(ngModel)]="pessoa.bairro" id="bairro" name="bairro"  class="form-control"
+             placeholder="">
+          </div>
+          <div class="form-group col-lg-9 px-1">
+            <label for="model">Cidade</label>
+            <input formControlName="cidade" type="text" [(ngModel)]="pessoa.cidade" id="cidade" name="cidade"  class="form-control"
+            placeholder="">
+          </div>
+          <div class="form-group col-lg-3 px-1">
+            <label for="model">UF</label>
+            <input formControlName="estado" type="text" [(ngModel)]="pessoa.estado" id="estado" name="estado"  class="form-control"
+             placeholder="">
+          </div>
+        </div>
+          <input formControlName="horaCriacao" type="hidden" [(ngModel)]="pessoa.horaCriacao" name="horaCriacao" value="">
+          <button [disabled]="!formularioDePessoa.valid" type="submit" class="btn btn-primary btn-add-pessoa">Salvar</button>
+
+        </form>
+    </div>
+  </div>
+</div>
+</div>

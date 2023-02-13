@@ -1,0 +1,21 @@
+<div *ngFor="let item of departamentos">
+
+      <div *ngIf="item.tipoPessoa === 'fisica'; then contentFisica else contentJuridica" class="row">
+      </div>
+      <ng-template  #contentFisica>
+        <div class="row">
+        <div class="col-lg-4">Nome: {{item.nomeCompleto}}</div>
+        <div class="col-lg-4">Documento: {{item.cpf}}</div>
+        <div class="col-lg-4">Apelido: {{item.apelido}}</div>
+        </div>
+      </ng-template>
+      <ng-template  #contentJuridica>
+        <div class="row">
+          <div class="col-lg-4">Razão Social: {{item.razaoSocial}}</div>
+          <div class="col-lg-4">Documento: {{item.cnpj}}</div>
+          <div class="col-lg-4">Nome Fantasia: {{item.nomeFantasia}}</div>
+        </div>
+      </ng-template>
+
+
+  </div>
